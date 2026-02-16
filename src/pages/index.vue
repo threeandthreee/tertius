@@ -18,8 +18,15 @@
         v-img.mx-1(src="/email.svg")
       p : 3@tert.us
   v-card.mb-4(variant="outlined")
-    v-card-title Projects
-    v-card-text(v-html="projectsHtml")
+    .mx-4.my-2(v-for="projectGroup, heading of projects")
+      h6.text-h6 {{heading}}
+      .d-flex.flex-wrap
+        v-chip.ma-1.flex-shrink-0(
+          v-for="url, label of projectGroup"
+          :href="url"
+          variant="outlined"
+          style="border-radius: 5px"
+        ) {{label}}
     v-card-actions
       link-btn(url="https://github.com/threeandthreee" src="/github.svg" desc="Github")
       link-btn(url="https://codepen.io/alnordst" src="/codepen.svg" desc="Codepen")
@@ -27,15 +34,12 @@
     v-card-title Art
     v-card-text
       .d-flex
-        v-card.mr-4(href="https://blog.3and3.dev" width="200px")
+        v-card.mr-4(href="https://blog.3and3.dev" width="400px")
           v-img(src="/sketch.png")
           v-card-text.text-overline.text-center Doodles
-        v-card.mr-4(href="https://comics.3and3.dev" width="200px")
+        v-card.mr-4(href="https://comics.3and3.dev" width="400px")
           v-img(src="/comic.png")
           v-card-text.text-overline.text-center Comics
-        v-card(href="https://games.3and3.dev" width="200px")
-          v-img(src="/game.png")
-          v-card-text.text-overline.text-center Games
   v-card(variant="outlined")
     v-card-title Speedrunning
     v-card-actions
@@ -46,8 +50,38 @@
 </template>
 
 <script setup>
-import { marked } from 'marked'
-import projectsMd from '@/assets/projects.md?raw'
+import { load } from 'js-yaml'
+import projectsYaml from '@/assets/projects.yaml?raw'
 
-const projectsHtml = marked(projectsMd)
+const projects = load(projectsYaml)
+
+/*
+const projects = [
+  {
+    url: 'https://raceswild.3and3.dev',
+    label: 'Races Wild',
+  },
+  {
+    url: 'https://github.com/threeandthreee/archipelago',
+    label: "Link's Awakening DX for Archipelago"
+  },
+  {
+    url: 'https://vod-sync.3and3.dev',
+    label: 'Vod Sync'
+  },
+  {
+    url: 'https://la-menu.3and3.dev',
+    label: 'LA/DX Menu Router'
+  },
+  {
+    url: '/blueprints',
+    label: 'Shapez Blueprint Library'
+  },
+  {
+    url: 'https://ladx-gfx.3and3.dev/',
+    label: 'LADX Custom Sprite Tools'
+  }
+]
+projects.sort((a, b) => a.label.localeCompare(b.label))
+*/
 </script>
