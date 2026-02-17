@@ -36,12 +36,21 @@
       .d-flex
         v-card.mr-4(href="https://blog.3and3.dev" width="400px")
           v-img(src="/sketch.png")
-          v-card-text.text-overline.text-center Doodles
-        v-card.mr-4(href="https://comics.3and3.dev" width="400px")
+          v-card-text.text-overline.text-center Sketch Blog
+        v-card(href="https://comics.3and3.dev" width="400px")
           v-img(src="/comic.png")
           v-card-text.text-overline.text-center Comics
   v-card(variant="outlined")
     v-card-title Speedrunning
+    v-card.src-times.mx-2.mb-2.px-2.pb-3(variant="outlined")
+      .d-flex.flex-column.game(v-for="([game, runs]) of srcTimes")
+        .text-overline.text-truncate.title {{game}}
+        .text-caption.entry(v-for="run of runs")
+          strong &bull;
+          span {{run.catName}}
+          em {{run.subCats}}:
+          a(:href="run.link") {{run.time}}
+          span ({{run.ord}})
     v-card-actions
       link-btn(url="https://twitch.tv/threeandthree" src="/twitch.svg" desc="Twitch.tv")
       link-btn(url="https://youtube.com/@threeandthree" src="/youtube.svg" desc="YouTube")
@@ -50,38 +59,34 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
 import { load } from 'js-yaml'
 import projectsYaml from '@/assets/projects.yaml?raw'
 
 const projects = load(projectsYaml)
+const srcTimes = ref([])
 
-/*
-const projects = [
-  {
-    url: 'https://raceswild.3and3.dev',
-    label: 'Races Wild',
-  },
-  {
-    url: 'https://github.com/threeandthreee/archipelago',
-    label: "Link's Awakening DX for Archipelago"
-  },
-  {
-    url: 'https://vod-sync.3and3.dev',
-    label: 'Vod Sync'
-  },
-  {
-    url: 'https://la-menu.3and3.dev',
-    label: 'LA/DX Menu Router'
-  },
-  {
-    url: '/blueprints',
-    label: 'Shapez Blueprint Library'
-  },
-  {
-    url: 'https://ladx-gfx.3and3.dev/',
-    label: 'LADX Custom Sprite Tools'
-  }
-]
-projects.sort((a, b) => a.label.localeCompare(b.label))
-*/
+onMounted(async () => {
+  const resp = await fetch('https://src-times.threeandthree.deno.net')
+  srcTimes.value = await resp.json()
+})
 </script>
+
+<style lang="sass">
+.src-times
+  .game
+    margin-top: 20px
+    margin-bottom: 4px
+    border-left: 1px solid #ccc
+    padding: 0 0 0 8px
+    .title
+      margin-top: -12px
+      margin-bottom: -12px
+    .entry
+      margin-top: 4px
+      margin-bottom: -4px
+      margin-left: 12px
+      text-indent: -8px
+      *
+        margin-right: 4px
+</style>
