@@ -1,9 +1,6 @@
 <template lang="pug">
-.mx-auto(style="max-width:600px")
-  h1.text-h1.d-flex.justify-center
-    span tert
-    span.pt-12.px-1 i
-    span us
+.mx-auto.my-4(style="max-width:600px")
+  h1.text-h1.d-flex.justify-center 3&3
   .mx-5.mb-4.d-flex.align-center.justify-space-between
     .d-flex.align-center.mb-1
       div.d-flex.align-center.mr-2(
@@ -16,7 +13,7 @@
         style="width:30px;height:30px;background-color:white;border-radius:100%"
       )
         v-img.mx-1(src="/email.svg")
-      p : 3@tert.us
+      p : 3@3and3.us
   v-card.mb-4(variant="outlined")
     .mx-4.my-2(v-for="projectGroup, heading of projects")
       h6.text-h6 {{heading}}
@@ -34,10 +31,10 @@
     v-card-title Art
     v-card-text
       .d-flex
-        v-card.mr-4(href="https://blog.3and3.dev" width="400px")
+        v-card.mr-4(href="https://blog.3and3.dev" width="400px" variant="outlined")
           v-img(src="/sketch.png")
           v-card-text.text-overline.text-center Sketch Blog
-        v-card(href="https://comics.3and3.dev" width="400px")
+        v-card(href="https://comics.3and3.dev" width="400px" variant="outlined")
           v-img(src="/comic.png")
           v-card-text.text-overline.text-center Comics
   v-card(variant="outlined")
@@ -87,6 +84,8 @@ onMounted(async () => {
       margin-bottom: -4px
       margin-left: 12px
       text-indent: -8px
+      a
+        color: #888
       *
         margin-right: 4px
 </style>
