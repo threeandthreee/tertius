@@ -13,7 +13,7 @@
         style="width:30px;height:30px;background-color:white;border-radius:100%"
       )
         v-img.mx-1(src="/email.svg")
-      p : 3@3and3.us
+      p : 3@3and3.dev
   v-card.mb-4(variant="outlined")
     .mx-4.my-2(v-for="projectGroup, heading of projects")
       h6.text-h6 {{heading}}
