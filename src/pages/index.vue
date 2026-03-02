@@ -32,10 +32,10 @@
     v-card-text
       .d-flex
         v-card.mr-4(href="https://blog.3and3.dev" width="400px" variant="outlined")
-          v-img(src="/sketch.png")
+          v-img(src="https://i.imgur.com/BqF4MjX.png")
           v-card-text.text-overline.text-center Sketch Blog
         v-card(href="https://comics.3and3.dev" width="400px" variant="outlined")
-          v-img(src="/comic.png")
+          v-img(src="https://i.imgur.com/yJV7qNi.png")
           v-card-text.text-overline.text-center Comics
   v-card(variant="outlined")
     v-card-title Speedrunning
